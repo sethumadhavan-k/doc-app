@@ -3,7 +3,7 @@ const response = require('../helper/util')
 
 exports.save = function(req,res){
     console.log({body:req.body})
-    if(!req.body.d_id){
+    if(!req.body.p_id){
         Patient.save(req.body,(result,error)=>{
             res.send(response(result,error))
         })

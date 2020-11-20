@@ -15,6 +15,7 @@ router.get('/dashboard', function(req, res, next) {
 
 router.get('/patients',(req, res)=>{
   Patient.selectall((result,error)=>{
+    console.log(result)
     res.render('patients',{patients:result})
   })
 });
