@@ -141,6 +141,6 @@
         animation: 'fade'
     }); 	   
 	
-	$('#data-table-basic').DataTable();
+	// $('#data-table-basic').DataTable();
  
 })(jQuery); 

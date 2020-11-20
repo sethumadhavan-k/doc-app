@@ -6,60 +6,39 @@
 <br>
 <div class="row">
     <div class="col-md-12">
-        <table id="data-table-basic" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>#code</th>
-            <th>Name</th>
-            <th>Patients</th>
-            <th style="width: 190px">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-       <tr>
-            <td>#code</td>
-            <td><a href="/sub-diseases"> Disease 1</a></td>
-            <td>6</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td><a href="/sub-diseases"> Disease 2</a></td>
-            <td>7</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td><a href="/sub-diseases"> Disease 3</a></td>
-            <td>7</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-        <tr>
-            <td>#code</td>
-            <td><a href="/sub-diseases"> Disease 4</a></td>
-            <td>4</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td><a href="/sub-diseases"> Disease 5</a></td>
-            <td>2</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td><a href="/sub-diseases"> Disease 5</a></td>
-            <td>9</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-    </tbody>
+        <table id="table" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>code</th>
+                    <th>Name</th>
+                    <th>Patients</th>
+                    <th style="width: 190px">Action</th>
+                </tr>
+            </thead>
+        <tbody>
+       
+        {{#each diseases}}
+            <tr>
+                <td>{{@index}}</td>
+                <td><a href="/sub-diseases/{{this.id}}"> {{this.name}}</a></td>
+                <td>6</td>
+                <td>
+                    <button class="btn btn-sm btn-primary edit-btn" data-id="{{this.id}}" data-name="{{this.name}}">Edit/View</button> 
+                    <button class="btn btn-sm btn-danger ajaxConfirmEle" data-url="/api/disease/delete/{{this.id}}" data-title="Do want to delete?" data-method="delete" data-callback="reload">Delete</button>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+        <tfoot>
+
+        </tfoot>
 </table>
     </div>
 </div> 
 
 <div class="modal fade" id="patientModal" role="dialog">
     <div class="modal-dialog" role="document">
+        <form action="/api/disease/save" method="POST">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="exampleModalLabel">Disease</h3>
@@ -71,19 +50,43 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
+                            <input type="hidden" class="form-control" id="d_id" name="d_id" >
                             <label>Disease Name</label>
-                            <input type="text" class="form-control" id="p_name" name="p_name" required>
+                            <input type="text" class="form-control" id="d_name" name="d_name" required>
                         </div>
                     </div>
                 </div>
-                
-                
-        
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Save</button>
+                <button type="submit" class="btn btn-success">Save</button>
             </div>
         </div>
+        </form>
   </div>
 </div>
+
+{{#section 'script'}}
+<script>
+   $(document).ready(function(){
+        $("#table").DataTable({
+            "fnDrawCallback": function( oSettings ) {
+                load();
+            },
+        });
+
+        function load(){
+            $('.edit-btn').off('click').on('click',function(){
+                $('#d_id').val($(this).data('id'));
+                $('#d_name').val($(this).data('name'));
+                $('#patientModal').modal('show');
+            });
+        }
+        
+        function reload(){
+
+        }
+      
+   })
+</script>
+{{/section}}

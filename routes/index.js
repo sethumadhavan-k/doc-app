@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
+var Disease = require('../model/disease')
+var Doctor = require('../model/doctor')
+var Patient = require('../model/patient')
 /* GET home page. */
 
 router.get('/',(req,res)=>{
@@ -12,19 +14,25 @@ router.get('/dashboard', function(req, res, next) {
 });
 
 router.get('/patients',(req, res)=>{
-  res.render('patients')
+  Patient.selectall((result,error)=>{
+    res.render('patients',{patients:result})
+  })
 });
 
 router.get('/doctors',(req,res)=>{
-  res.render('doctors')
+  Doctor.selectall((result,error)=>{
+    res.render('doctors',{doctors:result})
+  })
 });
 
 router.get('/diseases',(req,res)=>{
-  res.render('diseases')
+  Disease.selectall((result,error)=>{
+    res.render('diseases',{diseases:result})
+  })
 })
 
-router.get('/sub-diseases',(req,res)=>{
-  res.render('sub-diseases')
+router.get('/sub-diseases/:id',(req,res)=>{
+  res.render('sub-diseases',{parent_id:req.params.id})
 })
 
 router.get('/users',(req,res)=>{
