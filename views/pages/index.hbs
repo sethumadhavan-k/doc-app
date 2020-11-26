@@ -41,6 +41,12 @@
         </div>
 </div>
 <br>
+<div class="row">
+    <div class="col-md-12">
+        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#patientModal">New OP</button>
+    </div>
+</div>
+<br>
 <div class="">
     <div class="container">
         <div class="row">
@@ -60,39 +66,19 @@
                                         <th>Name</th>
                                         <th style="width: 250px;">Mobile</th>
                                         <th style="width: 150px">Doctor</th>
+                                        <th>Note</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="f-500 c-cyan">4555</td>
-                                        <td>Patient 1</td>
-                                        <td>1234567890</td>
-                                        <td class="f-500 c-cyan">Doctor 1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="f-500 c-cyan">4556</td>
-                                        <td>Patient 2</td>
-                                        <td>1234567890</td>
-                                        <td class="f-500 c-cyan">Doctor 2</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="f-500 c-cyan">8778</td>
-                                        <td>Patient 3</td>
-                                        <td>1234567890</td>
-                                        <td class="f-500 c-cyan">Doctor 3</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="f-500 c-cyan">5667</td>
-                                        <td>Patient 4</td>
-                                        <td>1234567890</td>
-                                        <td class="f-500 c-cyan">Doctor 4</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="f-500 c-cyan">7886</td>
-                                        <td>Patient 5</td>
-                                        <td>1234567890</td>
-                                        <td class="f-500 c-cyan">Doctor 5</td>
-                                    </tr>
+                                    {{#each ops}}
+                                        <tr>
+                                            <td>{{this.pcode}}</td>
+                                            <td>{{this.pname}}</td>
+                                            <td>{{this.mobile}}</td>
+                                            <td>{{this.dname}}</td>
+                                            <td>{{this.note}}</td>
+                                        </tr>
+                                    {{/each}}
                                 </tbody>
                             </table>
                         </div>
@@ -103,3 +89,174 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="modal fade" id="patientModal" role="dialog">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <form id="form1" action="/api/op/save" method="POST">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">OP</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Patient Code</label>
+                            <input type="text" id="patient_code" class="form-control" name="patient_code" required>
+                            <input type="hidden" class="form-control" id="p_id" name="p_id" required>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                   <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Doctor</label>
+                            <select class="form-control" id="p_op_doctor" name="p_op_doctor" required="">
+                                <option value="1">Doctor 1</option>
+                                <option value="2">Doctor 2</option>
+                                <option value="3">Doctor 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" class="form-control" value="dd-mm-yyyy" id="p_date" name="p_date">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Note</label>
+                            <input type="text" class="form-control"id="p_note" name="p_note">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Patient Name</label>
+                            <input type="text" class="form-control" id="p_name" name="p_name" readonly disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                         <div class="form-group">
+                            <label>Mobile</label>
+                            <input type="number" class="form-control" id="p_mobile" name="p_mobile" readonly disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                         <div class="form-group">
+                            <label>Disrict</label>
+                            <input type="text" class="form-control" id="p_disctrict" name="p_disctrict" readonly disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Place</label>
+                            <input type="text" class="form-control" id="p_place" name="p_place" readonly disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Sex</label>
+                            <input type="text" class="form-control" id="p_sex" name="p_sex" readonly disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" class="form-control" id="p_age" name="p_age" readonly disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Cancer Type</label>
+                           <input type="text" class="form-control" id="p_disease" name="p_disease" readonly disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Sub Category</label>
+                            <input type="text" class="form-control" id="p_sub_disease" name="p_sub_disease" readonly disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>First OP Doctor</label>
+                             <input type="text" class="form-control" id="p_doctor" name="p_doctor" readonly disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+            </form>
+        </div>
+  </div>
+</div>
+{{#section 'script'}}
+<script>
+   $(document).ready(function(){
+       $('#form1').on('keyup keypress', function(e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode === 13) { 
+                e.preventDefault();
+                return false;
+            }
+        });
+
+       $('#patient_code').off("keypress").on('keypress',function(e){
+           if(e.charCode == 13){
+               $.get("api/patient/code/"+this.value, function(data) {
+                    res = data //JSON.parse(data);
+                    if(res.data){
+                        $('#p_id').val(res.data.id);
+                        $('#p_name').val(res.data.name);
+                        $('#p_mobile').val(res.data.mobile);
+                        $('#p_disctrict').val(res.data.email);
+                        $('#p_place').val(res.data.place);
+                        $('#p_sex').val(res.data.sex);
+                        $('#p_age').val(res.data.disease);
+                        $('#p_disease').val(res.data.disease);
+                        $('#p_sub_disease').val(res.data.disease);
+                        $('#p_doctor').val(res.data.disease);
+                    }
+                    
+                });
+           }
+       })
+
+
+        $("#table").DataTable({
+            "fnDrawCallback": function( oSettings ) {
+                load();
+            },
+        });
+
+        function load(){
+            $('.edit-btn').off('click').on('click',function(){
+                $('#sd_id').val($(this).data('id'));
+                $('#sd_name').val($(this).data('name'));
+                $('#patientModal').modal('show');
+            });
+        }
+        
+        function reload(){
+
+        }
+      
+   })
+</script>
+{{/section}}

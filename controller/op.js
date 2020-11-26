@@ -1,16 +1,14 @@
-const Disease = require('../model/disease')
+const OP = require('../model/op')
 const response = require('../helper/util')
 
 exports.save = function(req,res){
-    console.log({body:req.body})
-    if(!req.body.d_id){
-        Disease.save(req.body,(result,error)=>{
+    if(!req.body.op_id){
+        OP.save(req.body,(result,error)=>{
             res.send(response(result,error))
         })
     }
     else{
-        Disease.update(req.body,(result,error)=>{
-            console.log(error)
+        OP.update(req.body,(result,error)=>{
             res.send(response(result,error))
         })
     }
@@ -18,7 +16,7 @@ exports.save = function(req,res){
 }
 
 exports.delete = function(req,res){
-    Disease.delete(req.params.id,(result,error)=>{
+    OP.delete(req.params.id,(result,error)=>{
         res.send(response(result,error))
     })
 }

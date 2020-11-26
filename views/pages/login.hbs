@@ -60,33 +60,38 @@
     <!-- Login Register area Start-->
     <div class="login-content">
         <!-- Login -->
-        <div class="nk-block toggled" id="l-login">
-            <div class="nk-form">
-                <div class="input-group">
-                    <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
-                    <div class="nk-int-st">
-                        <input type="text" class="form-control" placeholder="Username">
-                    </div>
-                </div>
-                <div class="input-group mg-t-15">
-                    <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
-                    <div class="nk-int-st">
-                        <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                </div>
-                <br>
-                <div>
-                    <a href="/dashboard"><button class="btn btn-success">Login</button></a>
-                </div>
-                {{!-- <div class="fm-checkbox">
-                    <label><input type="checkbox" class="i-checks"> <i></i> Keep me signed in</label>
-                </div> --}}
-                
-            </div>
-
-           
-        </div>
-
+        
+          <div class="nk-block toggled" id="l-login">
+            <form action="/" method="POST">
+              <div class="nk-form">
+                  <div class="input-group">
+                      <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                      <div class="nk-int-st">
+                          <input type="text" class="form-control" name="username" placeholder="Username">
+                      </div>
+                  </div>
+                  <div class="input-group mg-t-15">
+                      <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
+                      <div class="nk-int-st">
+                          <input type="password" class="form-control" name="password" placeholder="Password">
+                      </div>
+                  </div>
+                  <br>
+                  <div>
+                    <button type="submit" class="btn btn-success">Login</button><br>
+                  </div>
+                  <div style="padding-top: 15px;">
+                     <span style="color: red;">{{message}}</span>
+                  </div>
+                  {{!-- <div class="fm-checkbox">
+                      <label><input type="checkbox" class="i-checks"> <i></i> Keep me signed in</label>
+                  </div> --}}
+                  
+              </div>
+          </form>
+            
+          </div>
+        
         
     </div>
     <!-- Login Register area End-->

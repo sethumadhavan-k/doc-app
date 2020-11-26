@@ -6,7 +6,7 @@
 <br>
 <div class="row">
     <div class="col-md-12">
-        <table id="data-table-basic" class="table table-striped table-bordered">
+        <table id="table" class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>#code</th>
@@ -16,43 +16,17 @@
         </tr>
     </thead>
     <tbody>
-       <tr>
-            <td>#code</td>
-            <td>Disease 1</td>
-            <td>6</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td>Disease 2</td>
-            <td>7</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td>Disease 3</td>
-            <td>7</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-        <tr>
-            <td>#code</td>
-            <td>Disease 4</td>
-            <td>4</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td>Disease 5</td>
-            <td>2</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td>Disease 6</td>
-            <td>9</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
+       {{#each diseases}}
+            <tr>
+                <td>{{slno @index}}</td>
+                <td>{{this.name}}</td>
+                <td>6</td>
+                <td>
+                    <button class="btn btn-sm btn-primary edit-btn" data-id="{{this.id}}" data-name="{{this.name}}">Edit/View</button> 
+                    <button class="btn btn-sm btn-danger ajaxConfirmEle" data-url="/api/disease/delete/{{this.id}}" data-title="Do want to delete?" data-method="delete" data-callback="reload">Delete</button>
+                </td>
+            </tr>
+        {{/each}}
     </tbody>
 </table>
     </div>
@@ -61,6 +35,7 @@
 <div class="modal fade" id="patientModal" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <form action="/api/sub-disease/save" method="POST">
             <div class="modal-header">
                 <h3 class="modal-title" id="exampleModalLabel">Disease</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -72,7 +47,8 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Disease Name</label>
-                            <input type="hidden" id="sd_id" name="si_id" value="{{parent_id}}">
+                            <input type="hidden" id="sd_id" name="sd_id">
+                            <input type="hidden" id="sd_pid" name="sd_pid" value="{{parent_id}}">
                             <input type="text" class="form-control" id="sd_name" name="sd_name" required>
                         </div>
                     </div>
@@ -80,8 +56,34 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Save</button>
+                <button type="submit" class="btn btn-success">Save</button>
             </div>
+            </form>
         </div>
   </div>
 </div>
+{{#section 'script'}}
+<script>
+   $(document).ready(function(){
+        $("#table").DataTable({
+            "fnDrawCallback": function( oSettings ) {
+                load();
+            },
+        });
+
+        function load(){
+            $('.edit-btn').off('click').on('click',function(){
+                $('#sd_id').val($(this).data('id'));
+                $('#sd_name').val($(this).data('name'));
+                $('#patientModal').modal('show');
+            });
+        }
+        
+        function reload(){
+
+        }
+      
+   })
+</script>
+{{/section}}
+

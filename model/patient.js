@@ -71,5 +71,11 @@ Patient.selectall = function(callback){
      })
  }
 
+ Patient.getByCode = function(pcode,callback){
+    db.select('patients','*',`code ='${pcode}'`,(result,error)=>{
+         callback(result,error)
+     })
+ }
+
 
 module.exports = Patient

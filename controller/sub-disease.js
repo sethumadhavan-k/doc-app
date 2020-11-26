@@ -1,16 +1,14 @@
-const Disease = require('../model/disease')
+const SubDisease = require('../model/sub-disease')
 const response = require('../helper/util')
 
 exports.save = function(req,res){
-    console.log({body:req.body})
-    if(!req.body.d_id){
-        Disease.save(req.body,(result,error)=>{
+    if(!req.body.sd_id){
+        SubDisease.save(req.body,(result,error)=>{
             res.send(response(result,error))
         })
     }
     else{
-        Disease.update(req.body,(result,error)=>{
-            console.log(error)
+        SubDisease.update(req.body,(result,error)=>{
             res.send(response(result,error))
         })
     }
@@ -18,13 +16,13 @@ exports.save = function(req,res){
 }
 
 exports.delete = function(req,res){
-    Disease.delete(req.params.id,(result,error)=>{
+    SubDisease.delete(req.params.id,(result,error)=>{
         res.send(response(result,error))
     })
 }
 
 exports.get = function(req,res){
-    Disease.find(req.params.id,(result,error)=>{
+    SubDisease.find(req.params.id,(result,error)=>{
         res.send(response(result,error))
     })
 }

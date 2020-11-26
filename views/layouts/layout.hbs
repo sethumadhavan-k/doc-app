@@ -60,12 +60,37 @@
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
 
     <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
+    <style>
+      body.loading {
+        overflow: hidden;
+      }
+      #loader{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        background-color: black;
+        z-index: 3453;
+        opacity: .989;
+      }
+      #spinner-container{
+        text-align: center;
+        margin-top: 45vh;
+      }
+    </style>
 </head>
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-  
+    <div id="loader">
+        <div id="spinner-container">
+            <div class="spinner-grow text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
     {{> header}}
     {{> menu}}
 
@@ -134,11 +159,11 @@
     <!-- mCustomScrollbar JS
 		============================================ -->
     <script src="/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- jvectormap JS
+    {{!-- <!-- jvectormap JS
 		============================================ -->
     <script src="/js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="/js/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="/js/jvectormap/jvectormap-active.js"></script>
+    <script src="/js/jvectormap/jvectormap-active.js"></script> --}}
     <!-- sparkline JS
 		============================================ -->
     <script src="/js/sparkline/jquery.sparkline.min.js"></script>

@@ -1,65 +1,36 @@
 <div class="row">
     <div class="col-md-12">
-        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#patientModal">New Sub Category</button>
+        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#patientModal">New User</button>
     </div>
 </div>
 <br>
 <div class="row">
     <div class="col-md-12">
-        <table id="data-table-basic" class="table table-striped table-bordered">
+        <table id="table" class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>#code</th>
             <th>Name</th>
             <th>Mobile</th>
             <th>Email</th>
+            <th>Password</th>
             <th style="width: 190px">Action</th>
         </tr>
     </thead>
     <tbody>
-       <tr>
-            <td>#code</td>
-            <td>Name</td>
-            <td>Mobile</td>
-            <td>Email</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td>Name</td>
-           <td>Mobile</td>
-            <td>Email</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td>Name</td>
-            <td>Mobile</td>
-            <td>Email</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-        <tr>
-            <td>#code</td>
-            <td>Name</td>
-            <td>Mobile</td>
-            <td>Email</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td>Name</td>
-            <td>Mobile</td>
-            <td>Email</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
-            <td>#code</td>
-            <td>Name</td>
-            <td>Mobile</td>
-            <td>Email</td>
-            <td><button class="btn btn-sm btn-primary">Edit/View</button> <button class="btn btn-sm btn-danger">Delete</button></td>
-       </tr>
-       <tr>
+       {{#each users}}
+            <tr>
+                <td>{{ slno @index}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.mobile}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.password}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary edit-btn" data-id="{{this.id}}">Edit/View</button> 
+                    <button class="btn btn-sm btn-danger ajaxConfirmEle" data-url="/api/doctor/delete/{{this.id}}" data-title="Do want to delete?" data-method="delete" data-callback="reload">Delete</button>
+                </td>
+            </tr>
+        {{/each}}
     </tbody>
 </table>
     </div>
@@ -68,58 +39,94 @@
 <div class="modal fade" id="patientModal" role="dialog">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Users</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Doctor Name</label>
-                            <input type="text" class="form-control" id="p_name" name="p_name" required>
+            <form action="/api/user/save" method="POST">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Users</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" id="u_name" name="u_name" required>
+                                <input type="hidden"  id="u_id" name="u_id">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Mobile</label>
+                                <input type="number" class="form-control" id="u_mobile" name="u_mobile" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control" id="u_email" name="u_email" required>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                         <div class="form-group">
-                            <label>Mobile</label>
-                            <input type="number" class="form-control" id="p_mobile" name="p_mobile" required>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" class="form-control" id="u_username" name="u_username" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                         <div class="form-group">
-                            <label>Email</label>
-                            <input type="text" class="form-control" id="p_place" name="p_place" required>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" id="u_password" name="u_password" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <input type="password" class="form-control" id="p_password_c" name="p_password_c" required>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input type="text" class="form-control" id="p_place" name="p_place" required>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control" id="p_place" name="p_place" required>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Confirm Password</label>
-                            <input type="password" class="form-control" id="p_place" name="p_place" required>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Save</button>
-            </div>
+            </form>
         </div>
   </div>
 </div>
+
+{{#section 'script'}}
+<script>
+   $(document).ready(function(){
+        $("#table").DataTable({
+            "fnDrawCallback": function( oSettings ) {
+                load();
+            },
+        });
+
+        function load(){
+            $('.edit-btn').off('click').on('click',function(){
+                let id = $(this).data('id');
+                $.get("api/user/get/"+id, function(data) {
+                    res = data //JSON.parse(data);
+                    $('#u_id').val(id);
+                    $('#u_name').val(res.data.name);
+                    $('#u_mobile').val(res.data.mobile);
+                    $('#u_email').val(res.data.email);
+                    $('#u_username').val(res.data.username);
+                });
+                $('#patientModal').modal('show');
+            });
+        }
+        
+        function reload(){
+
+        }
+      
+   })
+</script>
+{{/section}}
+

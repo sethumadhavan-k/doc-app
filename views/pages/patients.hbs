@@ -164,7 +164,6 @@
                 let id = $(this).data('id');
                 $.get("api/patient/get/"+id, function(data) {
                     res = data //JSON.parse(data);
-                    console.log(res);
                     $('#p_id').val(id);
                     $('#p_name').val(res.data.name);
                     $('#p_mobile').val(res.data.mobile);

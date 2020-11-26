@@ -21,7 +21,7 @@
     <tbody>
       {{#each doctors}}
             <tr>
-                <td>{{@index}}</td>
+                <td>{{slno @index}}</td>
                 <td>{{this.name}}</td>
                 <td>{{this.mobile}}</td>
                 <td>{{this.email}}</td>
@@ -125,7 +125,6 @@
                 let id = $(this).data('id');
                 $.get("api/doctor/get/"+id, function(data) {
                     res = data //JSON.parse(data);
-                    console.log(res);
                     $('#d_id').val(id);
                     $('#d_name').val(res.data.name);
                     $('#d_mobile').val(res.data.mobile);

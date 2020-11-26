@@ -7,12 +7,13 @@ const db = mysql.createConnection({
     database:"docter_app"
 });
 
+
 db.connect((err)=>{
-    // console.log(err)
-    if(err){
-        console.error("Database connection error" + err.stack);
-        return
-    }
+    if (err) 
+        console.log({"DB connect Error":err})
+    console.log("connected")
 });
+console.log("dbconfig")
+
 
 module.exports = db;

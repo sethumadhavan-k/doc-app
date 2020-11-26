@@ -20,11 +20,14 @@ Disease.save = function(data,callback){
         })
 }
 
-Disease.update = function(data,callback){
-    console.log(data)
+Disease.update =  function(data,callback){
     db.update('diseases',{name:data.d_name},{id:data.d_id},(result,error)=>{
         callback(result,error)
     })
+}
+
+Disease.test =  async (data)=>{
+    result = db.update('diseases',{name:data.d_name},{id:data.d_id})
 }
 
 Disease.delete = function(id,callback){

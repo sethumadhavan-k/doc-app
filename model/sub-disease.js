@@ -9,32 +9,31 @@ const Disease =  function (data) {
 } 
 
 Disease.find = function(id,callback){
-   db.select('diseases','*',{id},(result,error)=>{
+   db.select('diseases_sub','*',{id},(result,error)=>{
         callback(result,error)
     })
 }
 
 Disease.save = function(data,callback){
-       db.insert('diseases',{name:data.d_name},(result,error)=>{
+       db.insert('diseases_sub',{name:data.sd_name,parent:data.sd_pid},(result,error)=>{
             callback(result,error)
         })
 }
 
 Disease.update = function(data,callback){
-    console.log(data)
-    db.update('diseases',{name:data.d_name},{id:data.d_id},(result,error)=>{
+    db.update('diseases_sub',{name:data.sd_name,parent:data.sd_pid},{id:data.sd_id},(result,error)=>{
         callback(result,error)
     })
 }
 
 Disease.delete = function(id,callback){
-    db.update('diseases',{deleted_at:new Date()},{id},(result,error)=>{
+    db.update('diseases_sub',{deleted_at:new Date()},{id},(result,error)=>{
         callback(result,error)
     })
 }
 
 Disease.selectall = function(callback){
-    db.select('diseases','*',"deleted_at IS NULL",(result,error)=>{
+    db.select('diseases_sub','*',"deleted_at IS NULL",(result,error)=>{
          callback(result,error)
      })
  }

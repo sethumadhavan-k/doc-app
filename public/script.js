@@ -2,7 +2,7 @@
 
 
 
-function load(){
+function init(){
     $('.showModalEle').off('click').on('click',function () {
         let ele = $(this);
         let url = $(ele).data('url');
@@ -67,13 +67,14 @@ function load(){
         else
             reload = true
     
+        console.log(reload)
         console.log('formdata',formData)
         console.log('formdata-2',formData.entries())
         console.log('formdata-3',Object.fromEntries(formData.entries()))
         data = Object.fromEntries(formData.entries())
         ajaxCall(url,type, data ,function (response,status,xhr) {
             //response = JSON.parse(response);
-            console.log(response)
+            // console.log(response)
             if (response.status === true){
                 if(callback)
                     window[callback](response);
@@ -87,15 +88,21 @@ function load(){
     
     })
     $('.remove-ajax').off('submit');
+
+    $('a.loader').on('click',function(){
+        showLoader();
+    });
 }
-load();
+init();
 
 function showLoader() {
+    $('body').addClass('loading')
     $('#loader').show();
 }
 
 function hideLoader() {
     $('#loader').hide();
+    $('body').removeClass('loading')
 }
 
 
@@ -178,3 +185,8 @@ function errorMessage(message){
 function successMessage(res){
     tata.success('Success',res.message)
 }
+
+
+$(document).ready(function(){
+   hideLoader(); 
+})

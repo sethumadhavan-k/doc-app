@@ -2,7 +2,6 @@ const db = require('../config/dbconfig.js')
 
 function DB(){
     this.db = db;
-    console.log("db=util")
 }
 
 DB.insert = (table,values,callback = null)=>{
@@ -32,7 +31,6 @@ DB.update = (table,values,where = false,callback = null)=>{
             sqlValues.push(value)
         }
     }
-    console.log(sql,sqlValues);
     db.query(sql,sqlValues,(error,result)=>{
         if(callback){
             callback(result,error)
@@ -50,7 +48,6 @@ DB.delete = (table,where=false,callback=null)=>{
             sqlValues.push(value)
         }
     }
-    console.log(sql);
     db.query(sql,sqlValues,(error,result)=>{
         if(callback){
             callback(result,error)
@@ -74,6 +71,14 @@ DB.select = (table,columns,where = false,callback = false)=> {
     }
 
     db.query(sql,sqlValues,(error,result)=>{
+        if(callback){
+            callback(result,error)
+        }
+    })
+}
+
+DB.raw = (sql,callback)=>{
+    db.query(sql,(error,result)=>{
         if(callback){
             callback(result,error)
         }

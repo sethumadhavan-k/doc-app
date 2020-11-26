@@ -49,7 +49,6 @@ Doctor.update = function(data,callback){
 
 Doctor.delete = function(id,callback){
     db.update('doctors',{deleted_at:new Date()},{id},(result,error)=>{
-        console.log(error)
         callback(result,error)
     })
 }

@@ -2,7 +2,6 @@ const Doctor = require('../model/doctor')
 const response = require('../helper/util')
 
 exports.save = function(req,res){
-    console.log({body:req.body})
     if(!req.body.d_id){
         Doctor.save(req.body,(result,error)=>{
             res.send(response(result,error))
@@ -10,7 +9,6 @@ exports.save = function(req,res){
     }
     else{
         Doctor.update(req.body,(result,error)=>{
-            console.log(error)
             res.send(response(result,error))
         })
     }
