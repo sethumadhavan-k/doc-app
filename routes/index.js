@@ -14,6 +14,11 @@ router.get('/',(req,res)=>{
   res.render('login',{layout:null})
 })
 
+router.get('/logout',(req,res)=>{
+  req.session.destroy();
+  res.redirect('/')
+})
+
 router.post('/',(req,res)=>{
   User.login(req.body,(result,error)=>{
     if(result[0]){
