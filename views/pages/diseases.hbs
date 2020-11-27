@@ -6,7 +6,7 @@
 <br>
 <div class="row">
     <div class="col-md-12">
-        <table id="table" class="table table-striped table-bordered">
+        <table id="table" class="table table-custom">
             <thead>
                 <tr>
                     <th>code</th>
@@ -19,9 +19,9 @@
        
         {{#each diseases}}
             <tr>
-                <td>{{@index}}</td>
+                <td>{{slno @index}}</td>
                 <td><a href="/sub-diseases/{{this.id}}"> {{this.name}}</a></td>
-                <td>6</td>
+                <td>{{ this.count }}</td>
                 <td>
                     <button class="btn btn-sm btn-primary edit-btn" data-id="{{this.id}}" data-name="{{this.name}}">Edit/View</button> 
                     <button class="btn btn-sm btn-danger ajaxConfirmEle" data-url="/api/disease/delete/{{this.id}}" data-title="Do want to delete?" data-method="delete" data-callback="reload">Delete</button>

@@ -85,6 +85,10 @@ DB.raw = (sql,callback)=>{
     })
 }
 
+DB.asyncRaw = async (sql)=>{
+    a = await db.query(sql);
+    return a
+}
 
 
 // console.log(db)

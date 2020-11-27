@@ -57,6 +57,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 const AuthMiddleware = (req,res,next) =>{
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  let date = new Date();
+  res.locals.title_time = date.toLocaleDateString('en-US',options)
   if(req.url !== '/' && req.url !== '/sss')
     if(!req.session.user_loged)  throw new Error('AuthError')
   next()

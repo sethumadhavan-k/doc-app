@@ -27,6 +27,20 @@ exports.get = function(req,res){
     })
 }
 
+exports.getSubDisease = function(req,res){
+    Disease.selectSubDisease(req.params.id,(result,error)=>{
+        reslt = [result]
+        res.send(response(reslt,error))
+    })
+}
+
+exports.getDoctors = function(req,res){
+    Disease.selectDoctor(req.params.id,(result,error)=>{
+        reslt = [result]
+        res.send(response(reslt,error))
+    })
+}
+
 exports.loadDT = function(req,res){
 
 }

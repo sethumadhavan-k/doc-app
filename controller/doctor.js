@@ -23,7 +23,7 @@ exports.delete = function(req,res){
 
 exports.get = function(req,res){
     Doctor.find(req.params.id,(result,error)=>{
-        res.send(response(result[0],error))
+        res.send(response(result,error))
     })
 }
 

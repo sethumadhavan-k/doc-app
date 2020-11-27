@@ -26,9 +26,7 @@ Disease.update =  function(data,callback){
     })
 }
 
-Disease.test =  async (data)=>{
-    result = db.update('diseases',{name:data.d_name},{id:data.d_id})
-}
+
 
 Disease.delete = function(id,callback){
     db.update('diseases',{deleted_at:new Date()},{id},(result,error)=>{
@@ -40,7 +38,19 @@ Disease.selectall = function(callback){
     db.select('diseases','*',"deleted_at IS NULL",(result,error)=>{
          callback(result,error)
      })
- }
+}
+
+Disease.selectSubDisease = function(id,callback){
+    db.select('diseases_sub','*',`parent = ${id} AND deleted_at IS NULL`,(result,error)=>{
+         callback(result,error)
+     })
+}
+
+Disease.selectDoctor = function(id,callback){
+    db.select('doctors','*',`disease = ${id} AND deleted_at IS NULL`,(result,error)=>{
+         callback(result,error)
+     })
+}
 
 
 module.exports = Disease

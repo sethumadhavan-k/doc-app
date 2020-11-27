@@ -97,6 +97,11 @@ body {}
 .mg-b-15{
 	margin-bottom:15px;
 }
+
+.mg-b-30{
+	margin-bottom:30px;
+}
+
 .mg-t-15{
 	margin-top:15px;
 }
@@ -203,7 +208,7 @@ body {}
 }
 .navbar-nav>li>a{
 	color:#fff;
-	padding: 20px 0px 20px 30px;
+	padding: 16px 0px 20px 30px;
 }
 .rtl-layout .navbar-nav>li>a{
 	padding: 20px 30px 20px 0px;
@@ -4691,3 +4696,30 @@ body.box-layout {
     width: 1rem;
     height: 1rem;
   }
+
+
+  .table-custom thead {
+      background-color: #333333;
+  }
+  
+  .table-custom thead tr th {
+      color: white;
+  }
+  .table-custom tbody tr td {
+    border: 1px solid;
+}
+
+.table-custom tbody tr:nth-child(2n){
+    background-color: #cacaca;
+}
+
+.paginate_button {
+    background-color:#cacaca;
+}
+
+.paginate_button.current {
+    color:red !important;
+
+}
+
+  

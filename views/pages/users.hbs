@@ -6,33 +6,33 @@
 <br>
 <div class="row">
     <div class="col-md-12">
-        <table id="table" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>#code</th>
-            <th>Name</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th style="width: 190px">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-       {{#each users}}
-            <tr>
-                <td>{{ slno @index}}</td>
-                <td>{{this.name}}</td>
-                <td>{{this.mobile}}</td>
-                <td>{{this.email}}</td>
-                <td>{{this.password}}</td>
-                <td>
-                    <button class="btn btn-sm btn-primary edit-btn" data-id="{{this.id}}">Edit/View</button> 
-                    <button class="btn btn-sm btn-danger ajaxConfirmEle" data-url="/api/doctor/delete/{{this.id}}" data-title="Do want to delete?" data-method="delete" data-callback="reload">Delete</button>
-                </td>
-            </tr>
-        {{/each}}
-    </tbody>
-</table>
+        <table id="table" class="table table-custom">
+            <thead>
+                <tr>
+                    <th>SlNo</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th style="width: 190px">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each users}}
+                    <tr>
+                        <td>{{ slno @index}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.mobile}}</td>
+                        <td>{{this.email}}</td>
+                        <td>{{this.password}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary edit-btn" data-id="{{this.id}}">Edit/View</button> 
+                            <button class="btn btn-sm btn-danger ajaxConfirmEle" data-url="/api/doctor/delete/{{this.id}}" data-title="Do want to delete?" data-method="delete" data-callback="reload">Delete</button>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </div>
 </div> 
 

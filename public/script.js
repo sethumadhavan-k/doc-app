@@ -79,6 +79,7 @@ function init(){
                 if(callback)
                     window[callback](response);
                 successMessage(response)
+                location.reload()
             }
             else if(response.status === "invalid")
                 console.log(response.data);

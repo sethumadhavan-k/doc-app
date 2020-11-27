@@ -279,7 +279,7 @@
 		float: unset !important;
 	}
 	.rtl-layout .navbar-nav > li > a {
-		padding: 20px 0px 20px 30px;
+		padding: 16px 0px 20px 30px;
 	}
 	.rtl-layout .header-top-menu .nav.notika-top-nav li .search-dd {
 		left: -210px;

@@ -26,6 +26,7 @@ User.save = function(data,callback){
             username:data.u_username,
             password:data.u_password
         }
+       
        db.insert('users',obj,(result,error)=>{
             callback(result,error)
         })
@@ -39,7 +40,7 @@ User.update = function(data,callback){
         username:data.u_username,
         password:data.u_password
     }
-    db.update('users',obj,{id:data.d_id},(result,error)=>{
+    db.update('users',obj,{id:data.u_id},(result,error)=>{
         callback(result,error)
     })
 }

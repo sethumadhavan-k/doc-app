@@ -11,6 +11,8 @@ const OPController = require('../controller/op')
 router.post('/disease/save',DiseaseController.save)
 router.delete('/disease/delete/:id', DiseaseController.delete)
 router.get('/disease/get/:id',DiseaseController.get)
+router.get('/disease/get/sub-disease/:id',DiseaseController.getSubDisease)
+router.get('/disease/get/doctor/:id',DiseaseController.getDoctors)
 
 router.post('/sub-disease/save',SubDiseaseController.save)
 router.delete('/sub-disease/delete/:id', SubDiseaseController.delete)
